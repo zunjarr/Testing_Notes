@@ -1,0 +1,6 @@
+,id,week,channel,prod_grp_id,ecs_qs,trx_cnt,trx_qty,build_burn,demand,doh,inventory,ts,status,comment
+0,7285,07-02-2022,Non-Retail,65428,0,0,0,0,0,0,0,10-10-2022 21:14,pass,Values are matching hence passed
+1,7249,24-01-2022,Non-Retail,65428,0,0,5,3,6,7,0,10-10-2022 21:14,fail,In second file there is miss match and its trx_qty 5 is not same
+2,7213,24-01-2022,Mail Order,65428,0,0,3,0,0,0,0,10-10-2022 21:14,fail,In second file there is miss match and its trx_qty 3 is not same
+3,7105,31-01-2022,Retail Pharmacy,65428,0,0,0,0,0,0,0,10-10-2022 21:14,pass,Values are matching hence passed
+4,7069,24-01-2022,Mail Order,65430,0,0,0,0,5,0,0,10-10-2022 21:14,fail,In second file there is miss match and its demand 5 is not same
