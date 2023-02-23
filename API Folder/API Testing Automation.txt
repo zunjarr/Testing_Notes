@@ -1,0 +1,270 @@
+zunjarrbackup@gmail.com
+zzchain
+
+https://github.com/zunjar/python_basics.git
+# -----------------------------------------------------
+
+anything in PROD but not in UAT
+
+prod = ["a", "b"]
+uat = ["c","b"]
+
+[elem for elem in prod if elem not in uat ]
+
+[elem for elem in uat if elem not in prod ]
+# -----------------------------------------------------
+
+prod = pd.unique(df1['__source_file'])
+uat  = pd.unique(df2['__source_file'])
+
+pd.concat([df1,df2]).drop_duplicates(keep=False)
+# -----------------------------------------------------
+
+API Testing Automation
+ 
+
+fetch_user_data 
+
+import jsonpath
+import requests
+import json
+
+# API URL
+url = 'https://reqres.in/api/users?page=2'
+
+# Send GET request
+response = requests.get(url)
+
+print("response code is ", response)
+print("json dumps is ", json.dumps(response.json(), indent=4))
+print("Content or Body is ", response.content)
+print("Headers are ", response.headers)
+
+assert response.status_code == 200, "Wrong status_code"
+
+# Parsing response to JSON format
+json_response = json.loads(response.text)
+print("Parsed response to JSON format is ", json_response)
+
+# Fetch value using JSON path
+pages = jsonpath.jsonpath(json_response, "total_pages")
+print("pages is ", pages)
+
+assert pages[0] == 2, "Wrong total_pages data"
+#--------------------------------------------------------------------
+
+delete_user
+
+import requests
+
+# API URL
+url = 'https://reqres.in/api/users/2'
+
+response = requests.delete(url)
+
+# Fetch response code
+print("response is ", response.status_code)
+
+assert response.status_code == 204, "Resource is not deleted"
+#--------------------------------------------------------------------
+
+create_new_resource
+
+import jsonpath
+import requests
+import json
+
+# API URL
+url = 'https://reqres.in/api/users'
+
+# Read input file GET request
+file = open('C:\\Users\\dorugzu\\PycharmProjects\\pythonProject\\APItesting\\CreateUser.json', 'r')
+json_input = file.read()            # Data will store in string format
+request_input = json.loads(json_input)
+print(request_input)
+
+# Make POST request with Json input body
+response = requests.post(url, request_input)
+print("Response is", response.content)
+
+# Validation of Response code
+assert response.status_code == 201
+
+# Fetch Header from response
+print(response.headers.get('Content-Length'))
+
+# Parse response to Json format
+response_Json = json.loads(response.text)
+
+# Pick id using Json path
+id1 = jsonpath.jsonpath(response_Json, 'id')
+print(id1[0])
+#--------------------------------------------------------------------
+
+add_query_parameters
+
+import jsonpath
+import requests
+import json
+
+# API URL
+base_url = 'https://reqres.in/'   #Domain
+
+# Adding Query parameters to requests
+params = {'page': 7}
+                                #Path parameter ? Query parameter
+# response = requests.get(base_url + "/api/users?page=2")
+response = requests.get(base_url + "/api/users", params=params)
+
+print("response code is ", response)
+# print("response is ", json.dumps(response.json(), indent=4))
+--------------------------------------------------------------------
+
+post_request
+
+import jsonpath
+import requests
+import json
+
+# POST Request
+base_url = 'https://reqres.in/'
+payload = {
+    "name": "morpheus",
+    "job": "leader"
+}
+response = requests.post(base_url + "/api/users", data=payload)
+print(response.json())
+#--------------------------------------------------------------------
+
+Python_Basic_Que
+
+from jsonpath import xrange
+
+# Fibonacci Sequence
+a, b = 0, 1
+for i in xrange(0, 10):
+    print(a)
+    a, b = b, a + b
+# ----------------------------------------------------
+
+# Removing duplicate characters in a string
+
+# data = input("Enter a string")
+data = "ABABABANANNNAN"
+output = ""             # Method 1
+for ch in data:
+    if ch not in output:
+        output = output + ch
+
+list1 = []              # Method 2
+for ch in data:
+    if ch not in list1:
+        list1.append(ch)
+print(list1)
+output2 = ''.join(list1)
+
+print("Original string is: ", data)
+print("Result after removing duplicate is: ", output)
+print("Result after removing duplicate is: ", output2)
+# ----------------------------------------------------
+
+# Remove duplicate numbers
+
+dupnum = [10, 10, 30, 20, 40, 70, 70, 50, 50, 40]
+def remove_dupli(duplist):
+    noduplinum = []
+
+    for ele in duplist:
+        if ele not in noduplinum:
+            noduplinum.append(ele)
+ 
+    return noduplinum
+
+print(remove_dupli(dupnum))
+# ----------------------------------------------------
+
+# Remove consecutive duplicate characters
+
+givenstr = "AAABBBCCCCDDDDD"
+s = ''
+for char in givenstr:
+    if s == '' or char != s[len(s) - 1]:
+        s = s + char
+print(s)
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------  
+Copied on 24th May
+
+
+from jsonpath import xrange
+
+
+# Removing duplicate characters in a string
+
+# data = input("Enter a string")
+data = "ABABABANANNNAN"
+output = ""             # Method 1
+for ch in data:
+    if ch not in output:
+        output = output + ch
+
+list1 = []              # Method 2
+for ch in data:
+    if ch not in list1:
+        list1.append(ch)
+print(list1)
+output2 = ''.join(list1)
+
+print("Original string is: ", data)
+print("Result after removing duplicate is: ", output)
+print("Result after removing duplicate is: ", output2)
+# ----------------------------------------------------
+# Remove duplicate numbers
+
+dupnum = [10, 10, 40, 70, 70, 50, 40]
+def remove_dupli(duplist):
+    noduplinum = []
+
+    for ele in duplist:
+        if ele not in noduplinum:
+            noduplinum.append(ele)
+
+    return noduplinum
+
+print(remove_dupli(dupnum))
+# ----------------------------------------------------
+# Remove consecutive duplicate characters
+
+givenstr = "AAABBBCCCCDDDDD"
+s = ''
+for char in givenstr:
+    if s == '' or char != s[len(s) - 1]:
+        s = s + char
+print(s)
+# ----------------------------------------------------
+
+class Calculator:
+    num = 7     # <-- Class variable
+
+    def __init__(self, a, b): # <-- Constructor
+        self.a = a         # <-- Instance variable
+        self.b = b
+        print("I will call automatically when obj created")
+
+    def getData(self):
+        print("Executed getData method inside the class")
+
+    def sum(self):
+        return self.a + self.b
+
+obj = Calculator(5, 7)
+obj.getData()
+print(obj.sum())
+print(obj.num)
+
+obj1 = Calculator(6, 10)
+obj1.sum()
+print(obj1.sum())
+print(obj1.num)
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------ 
